@@ -1,5 +1,13 @@
 # TP3 — Análisis de conversaciones sobre reservas y turnos
 
+**Asignatura:** Diseño de Compiladores — Periodo 2026/2<br>
+**Institución:** Facultad Politécnica, Universidad Nacional de Asunción (FP-UNA)<br>
+**Profesor:** Prof. Ing. Sergio A. Aranda<br>
+**Integrantes:**
+
+- Carlos G. Amarilla Verdún
+- Bethania Ángel Chavez García
+
 Proyecto modular en Python para el análisis léxico, sintáctico y semántico de
 conversaciones. No utiliza dependencias externas.
 
@@ -80,3 +88,29 @@ El programa muestra el resumen de cada sesión y genera tres archivos:
 - S10: atención mixta.
 - S11: `PARCIAL` por salto de turno.
 - S12: `PENDIENTE`, sin cancelar el turno vigente.
+
+## Declaración de bibliotecas, herramientas de IA y contribuciones
+
+### Bibliotecas utilizadas
+
+El proyecto fue implementado utilizando exclusivamente la biblioteca estándar
+de Python (`re`, `json`, `sys`, `dataclasses`, `typing`, `pathlib`,
+`unicodedata` y `html`), sin requerir librerías de terceros ni herramientas
+externas de procesamiento de lenguaje natural.
+
+### Herramientas de IA
+
+La concepción, el análisis formal del lenguaje acotado, el diseño de la
+gramática BNF, los autómatas (AFN/AFD), el cálculo de los conjuntos PRIMERO y
+SIGUIENTE y la definición de las reglas semánticas fueron elaborados por los
+alumnos. Se utilizó Inteligencia Artificial como herramienta de apoyo para el
+asesoramiento en la implementación del código y para la maquetación tipográfica
+del informe en LaTeX.
+
+### Contribuciones de los integrantes
+
+- **Carlos G. Amarilla Verdún:** componente léxico y normalización, corrector
+  de Levenshtein, tabla de símbolos y generación de salidas (JSON, TXT y HTML).
+- **Bethania Ángel Chavez García:** diseño de la gramática BNF LL(1), cálculo
+  de conjuntos y demostración formal, analizador sintáctico predictivo (SDT) y
+  recuperación en modo pánico.
