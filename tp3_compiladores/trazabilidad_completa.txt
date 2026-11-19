@@ -1,0 +1,208 @@
+=====================================================================================
+     TRAZABILIDAD PASO A PASO DE TODAS LAS SESIONES (S01 A S12)
+     TP3 - DISEÑO DE COMPILADORES (FPUNA)
+=====================================================================================
+
+#####################################################################################
+ SESIÓN S01 | Análisis: COMPLETO | Estado: PENDIENTE
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "Tengo confirmada la reserva RS-208 para jueves 10:00." ---
+  1. Tokens:                PALABRA('Tengo'->'tengo', offset=0), KW_CONFIRMACION('confirmada'->'confirmada', offset=6), PALABRA('la'->'la', offset=17), ASP_RESERVA('reserva'->'reserva', offset=20), COD_RESERVA('RS-208'->'RS-208', offset=28), PALABRA('para'->'para', offset=35), DIA('jueves'->'jueves', offset=40), HORA('10:00'->'10:00', offset=47), PUNTUACION('.'->'.', offset=52)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-208
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial
+  5. Estado tras el turno:  CONFIRMADA | Vigente: {'dia': 'jueves', 'hora': '10:00'} | Pendiente: None
+
+--- [Turno 2] CLIENTE: "Quiero pasarla al viernes 11:00." ---
+  1. Tokens:                PALABRA('Quiero'->'quiero', offset=0), KW_CAMBIO('pasarla'->'pasarla', offset=7), PALABRA('al'->'al', offset=15), DIA('viernes'->'viernes', offset=18), HORA('11:00'->'11:00', offset=26), PUNTUACION('.'->'.', offset=31)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Solicitud_Cambio
+  5. Estado tras el turno:  PENDIENTE | Vigente: {'dia': 'jueves', 'hora': '10:00'} | Pendiente: {'dia': 'viernes', 'hora': '11:00'}
+
+--- [Turno 3] AGENTE: "Solicité el cambio." ---
+  1. Tokens:                KW_CAMBIO('Solicité'->'solicite', offset=0), PALABRA('el'->'el', offset=9), KW_CAMBIO('cambio'->'cambio', offset=12), PUNTUACION('.'->'.', offset=18)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Solicitud_Cambio
+  5. Estado tras el turno:  PENDIENTE | Vigente: {'dia': 'jueves', 'hora': '10:00'} | Pendiente: {'dia': 'viernes', 'hora': '11:00'}
+
+
+#####################################################################################
+ SESIÓN S02 | Análisis: COMPLETO | Estado: REPROGRAMADA
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "Tengo confirmada la reserva RS-208 para jueves 10:00." ---
+  1. Tokens:                PALABRA('Tengo'->'tengo', offset=0), KW_CONFIRMACION('confirmada'->'confirmada', offset=6), PALABRA('la'->'la', offset=17), ASP_RESERVA('reserva'->'reserva', offset=20), COD_RESERVA('RS-208'->'RS-208', offset=28), PALABRA('para'->'para', offset=35), DIA('jueves'->'jueves', offset=40), HORA('10:00'->'10:00', offset=47), PUNTUACION('.'->'.', offset=52)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-208
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial
+  5. Estado tras el turno:  CONFIRMADA | Vigente: {'dia': 'jueves', 'hora': '10:00'} | Pendiente: None
+
+--- [Turno 2] CLIENTE: "Quiero pasarla al viernes 11:00." ---
+  1. Tokens:                PALABRA('Quiero'->'quiero', offset=0), KW_CAMBIO('pasarla'->'pasarla', offset=7), PALABRA('al'->'al', offset=15), DIA('viernes'->'viernes', offset=18), HORA('11:00'->'11:00', offset=26), PUNTUACION('.'->'.', offset=31)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Solicitud_Cambio
+  5. Estado tras el turno:  PENDIENTE | Vigente: {'dia': 'jueves', 'hora': '10:00'} | Pendiente: {'dia': 'viernes', 'hora': '11:00'}
+
+--- [Turno 3] AGENTE: "Quedó confirmado el cambio para viernes 11:00." ---
+  1. Tokens:                PALABRA('Quedó'->'quedo', offset=0), KW_CONFIRMACION('confirmado'->'confirmado', offset=6), PALABRA('el'->'el', offset=17), KW_CAMBIO('cambio'->'cambio', offset=20), PALABRA('para'->'para', offset=27), DIA('viernes'->'viernes', offset=32), HORA('11:00'->'11:00', offset=40), PUNTUACION('.'->'.', offset=45)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Confirmacion_Reprogramacion
+  5. Estado tras el turno:  REPROGRAMADA | Vigente: {'dia': 'viernes', 'hora': '11:00'} | Pendiente: None
+
+
+#####################################################################################
+ SESIÓN S03 | Análisis: COMPLETO | Estado: CONFIRMADA
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "Tengo mi reserva confirmada, pero no quiero cancelar." ---
+  1. Tokens:                PALABRA('Tengo'->'tengo', offset=0), PALABRA('mi'->'mi', offset=6), ASP_RESERVA('reserva'->'reserva', offset=9), KW_CONFIRMACION('confirmada'->'confirmada', offset=17), PUNTUACION(','->',', offset=27), CONJ_PERO('pero'->'pero', offset=29), ADV_NEG('no'->'no', offset=34), PALABRA('quiero'->'quiero', offset=37), KW_CANCELAR('cancelar'->'cancelar', offset=44), PUNTUACION('.'->'.', offset=52)
+  2. Estructura sintáctica: ORACION -> 2 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial, Regla_Neg_Cancelacion
+  5. Estado tras el turno:  CONFIRMADA | Vigente: None | Pendiente: None
+
+
+#####################################################################################
+ SESIÓN S04 | Análisis: COMPLETO | Estado: CANCELADA
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "La reserva fue un desastre; ya cancelé RS-203." ---
+  1. Tokens:                PALABRA('La'->'la', offset=0), ASP_RESERVA('reserva'->'reserva', offset=3), PALABRA('fue'->'fue', offset=11), PALABRA('un'->'un', offset=15), VAL_NEG('desastre'->'desastre', offset=18), PUNTUACION(';'->';', offset=26), PALABRA('ya'->'ya', offset=28), KW_CANCELAR('cancelé'->'cancele', offset=31), COD_RESERVA('RS-203'->'RS-203', offset=39), PUNTUACION('.'->'.', offset=45)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-203
+  4. Acciones semánticas:   Regla_Val_Reserva_Neg, Regla_Cancelacion_Efectiva
+  5. Estado tras el turno:  CANCELADA | Vigente: None | Pendiente: None
+
+
+#####################################################################################
+ SESIÓN S05 | Análisis: COMPLETO | Estado: SIN_CONFIRMAR
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "No entendí la explicación, pero me atendieron muy bien." ---
+  1. Tokens:                ADV_NEG('No'->'no', offset=0), ASP_CLARIDAD('entendí'->'entendi', offset=3), PALABRA('la'->'la', offset=11), ASP_CLARIDAD('explicación'->'explicacion', offset=14), PUNTUACION(','->',', offset=25), CONJ_PERO('pero'->'pero', offset=27), PALABRA('me'->'me', offset=32), ASP_ATENCION('atendieron'->'atendieron', offset=35), ADV_INTENS('muy'->'muy', offset=46), VAL_POS('bien'->'bien', offset=50), PUNTUACION('.'->'.', offset=54)
+  2. Estructura sintáctica: ORACION -> 2 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Val_Claridad_Neg, Regla_Val_Atencion_Pos
+  5. Estado tras el turno:  SIN_CONFIRMAR | Vigente: None | Pendiente: None
+
+
+#####################################################################################
+ SESIÓN S06 | Análisis: COMPLETO | Estado: CONFIRMADA
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "La resrva RS-204 fue confirmada para lunes 09:30." ---
+  1. Tokens:                PALABRA('La'->'la', offset=0), ASP_RESERVA('resrva'->'reserva', offset=3), COD_RESERVA('RS-204'->'RS-204', offset=10), PALABRA('fue'->'fue', offset=17), KW_CONFIRMACION('confirmada'->'confirmada', offset=21), PALABRA('para'->'para', offset=32), DIA('lunes'->'lunes', offset=37), HORA('09:30'->'09:30', offset=43), PUNTUACION('.'->'.', offset=48)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-204
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial
+  5. Estado tras el turno:  CONFIRMADA | Vigente: {'dia': 'lunes', 'hora': '09:30'} | Pendiente: None
+
+  EVENTOS DEL CORRECTOR:
+    - T1 [CORRECCION]: Corregido 'resrva' -> 'reserva' (Levenshtein=1, candidato único)
+
+
+#####################################################################################
+ SESIÓN S07 | Análisis: PARCIAL | Estado: PENDIENTE
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "Tengo confirmada la reserva RS-205 para martes 08:00." ---
+  1. Tokens:                PALABRA('Tengo'->'tengo', offset=0), KW_CONFIRMACION('confirmada'->'confirmada', offset=6), PALABRA('la'->'la', offset=17), ASP_RESERVA('reserva'->'reserva', offset=20), COD_RESERVA('RS-205'->'RS-205', offset=28), PALABRA('para'->'para', offset=35), DIA('martes'->'martes', offset=40), HORA('08:00'->'08:00', offset=47), PUNTUACION('.'->'.', offset=52)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-205
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial
+  5. Estado tras el turno:  CONFIRMADA | Vigente: {'dia': 'martes', 'hora': '08:00'} | Pendiente: None
+
+--- [Turno 3] CLIENTE: "Quiero pasarla al miercoles 10:00." ---
+  1. Tokens:                PALABRA('Quiero'->'quiero', offset=0), KW_CAMBIO('pasarla'->'pasarla', offset=7), PALABRA('al'->'al', offset=15), DIA('miercoles'->'miercoles', offset=18), HORA('10:00'->'10:00', offset=28), PUNTUACION('.'->'.', offset=33)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Solicitud_Cambio
+  5. Estado tras el turno:  PENDIENTE | Vigente: {'dia': 'martes', 'hora': '08:00'} | Pendiente: {'dia': 'miercoles', 'hora': '10:00'}
+
+  RECUPERACIONES / ERRORES:
+    - T2: Rol no admitido 'RECEPCION'; se esperaba CLIENTE o AGENTE | Línea: 2 RECEPCION: Hola buen dia.
+
+
+#####################################################################################
+ SESIÓN S08 | Análisis: COMPLETO | Estado: SIN_CONFIRMAR
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "cambi" ---
+  1. Tokens:                PALABRA('cambi'->'cambi', offset=0)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Ninguna
+  5. Estado tras el turno:  SIN_CONFIRMAR | Vigente: None | Pendiente: None
+
+  EVENTOS DEL CORRECTOR:
+    - T1 [ABSTENCION]: Empate a distancia 1 entre ['cambia', 'cambio']; se conserva 'cambi' por abstención
+
+
+#####################################################################################
+ SESIÓN S09 | Análisis: COMPLETO | Estado: SIN_CONFIRMAR
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "La atencion no fue muy buena, pero la explicacion fue excelente." ---
+  1. Tokens:                PALABRA('La'->'la', offset=0), ASP_ATENCION('atencion'->'atencion', offset=3), ADV_NEG('no'->'no', offset=12), PALABRA('fue'->'fue', offset=15), ADV_INTENS('muy'->'muy', offset=19), VAL_POS('buena'->'buena', offset=23), PUNTUACION(','->',', offset=28), CONJ_PERO('pero'->'pero', offset=30), PALABRA('la'->'la', offset=35), ASP_CLARIDAD('explicacion'->'explicacion', offset=38), PALABRA('fue'->'fue', offset=50), VAL_POS('excelente'->'excelente', offset=54), PUNTUACION('.'->'.', offset=63)
+  2. Estructura sintáctica: ORACION -> 2 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Val_Atencion_Neg, Regla_Val_Claridad_Pos
+  5. Estado tras el turno:  SIN_CONFIRMAR | Vigente: None | Pendiente: None
+
+
+#####################################################################################
+ SESIÓN S10 | Análisis: COMPLETO | Estado: SIN_CONFIRMAR
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "La atencion fue excelente." ---
+  1. Tokens:                PALABRA('La'->'la', offset=0), ASP_ATENCION('atencion'->'atencion', offset=3), PALABRA('fue'->'fue', offset=12), VAL_POS('excelente'->'excelente', offset=16), PUNTUACION('.'->'.', offset=25)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Val_Atencion_Pos
+  5. Estado tras el turno:  SIN_CONFIRMAR | Vigente: None | Pendiente: None
+
+--- [Turno 2] CLIENTE: "La atencion fue un desastre." ---
+  1. Tokens:                PALABRA('La'->'la', offset=0), ASP_ATENCION('atencion'->'atencion', offset=3), PALABRA('fue'->'fue', offset=12), PALABRA('un'->'un', offset=16), VAL_NEG('desastre'->'desastre', offset=19), PUNTUACION('.'->'.', offset=27)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Val_Atencion_Neg
+  5. Estado tras el turno:  SIN_CONFIRMAR | Vigente: None | Pendiente: None
+
+
+#####################################################################################
+ SESIÓN S11 | Análisis: PARCIAL | Estado: CONFIRMADA
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "Tengo confirmada la reserva RS-209 para lunes 10:00." ---
+  1. Tokens:                PALABRA('Tengo'->'tengo', offset=0), KW_CONFIRMACION('confirmada'->'confirmada', offset=6), PALABRA('la'->'la', offset=17), ASP_RESERVA('reserva'->'reserva', offset=20), COD_RESERVA('RS-209'->'RS-209', offset=28), PALABRA('para'->'para', offset=35), DIA('lunes'->'lunes', offset=40), HORA('10:00'->'10:00', offset=46), PUNTUACION('.'->'.', offset=51)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-209
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial
+  5. Estado tras el turno:  CONFIRMADA | Vigente: {'dia': 'lunes', 'hora': '10:00'} | Pendiente: None
+
+  RECUPERACIONES / ERRORES:
+    - T2: Número fuera de secuencia: esperado 2, recibido 3 | Línea: 3 CLIENTE: Quiero pasarla al martes 12:00.
+
+
+#####################################################################################
+ SESIÓN S12 | Análisis: COMPLETO | Estado: PENDIENTE
+#####################################################################################
+
+--- [Turno 1] CLIENTE: "Tengo confirmada la reserva RS-210 para viernes 15:00." ---
+  1. Tokens:                PALABRA('Tengo'->'tengo', offset=0), KW_CONFIRMACION('confirmada'->'confirmada', offset=6), PALABRA('la'->'la', offset=17), ASP_RESERVA('reserva'->'reserva', offset=20), COD_RESERVA('RS-210'->'RS-210', offset=28), PALABRA('para'->'para', offset=35), DIA('viernes'->'viernes', offset=40), HORA('15:00'->'15:00', offset=48), PUNTUACION('.'->'.', offset=53)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Insertar reserva_id=RS-210
+  4. Acciones semánticas:   Regla_Confirmacion_Inicial
+  5. Estado tras el turno:  CONFIRMADA | Vigente: {'dia': 'viernes', 'hora': '15:00'} | Pendiente: None
+
+--- [Turno 2] CLIENTE: "Voy a cancelar." ---
+  1. Tokens:                PALABRA('Voy'->'voy', offset=0), PALABRA('a'->'a', offset=4), KW_CANCELAR('cancelar'->'cancelar', offset=6), PUNTUACION('.'->'.', offset=14)
+  2. Estructura sintáctica: ORACION -> 1 CLAUSULA(S)
+  3. Tabla de símbolos:     Sin cambios
+  4. Acciones semánticas:   Regla_Intencion_Cancelacion
+  5. Estado tras el turno:  PENDIENTE | Vigente: {'dia': 'viernes', 'hora': '15:00'} | Pendiente: None

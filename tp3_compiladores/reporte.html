@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de sesiones — TP3 Compiladores FPUNA</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #eef2f7;
+            color: #0f172a;
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #eef2f7; color: #0f172a; }
+        .container { max-width: 1500px; margin: 0 auto; padding: 24px; }
+        .header {
+            display: flex; justify-content: space-between; gap: 24px;
+            align-items: center; padding: 26px 30px; margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #dbe4ef; border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.07);
+        }
+        .header h1 { margin: 0; font-size: 1.35rem; line-height: 1.3; }
+        .header p { margin: 7px 0 0; color: #475569; font-size: 0.95rem; }
+        .autores { text-align: right; color: #334155; line-height: 1.6; font-size: 0.9rem; }
+        .kpi-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px; margin-bottom: 24px;
+        }
+        .kpi {
+            --acento: #0284c7; background: #ffffff; padding: 17px 18px;
+            border: 1px solid #dbe4ef; border-top: 4px solid var(--acento);
+            border-radius: 12px; box-shadow: 0 5px 15px rgba(15, 23, 42, 0.04);
+        }
+        .kpi span { color: #64748b; font-size: 0.76rem; font-weight: 800;
+            letter-spacing: 0.05em; text-transform: uppercase; }
+        .kpi strong { display: block; margin-top: 5px; font-size: 1.75rem; }
+        .kpi.verde { --acento: #16a34a; } .kpi.azul { --acento: #0284c7; }
+        .kpi.amarillo { --acento: #d97706; } .kpi.rojo { --acento: #dc2626; }
+        .kpi.gris { --acento: #64748b; } .kpi.violeta { --acento: #7c3aed; }
+        .tabla-card {
+            overflow: hidden; background: #ffffff; border: 1px solid #dbe4ef;
+            border-radius: 15px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+        .tabla-scroll { overflow-x: auto; }
+        table { width: 100%; min-width: 1200px; border-collapse: collapse; text-align: left; }
+        th {
+            padding: 14px 12px; background: #0f172a; color: #f8fafc;
+            font-size: 0.76rem; letter-spacing: 0.045em; text-transform: uppercase;
+        }
+        td { padding: 14px 12px; border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle; font-size: 0.86rem; }
+        .fila-sesion:hover { background: #f8fafc; }
+        .badge { display: inline-block; border-radius: 999px; font-weight: 750;
+            white-space: nowrap; }
+        .badge-estado { padding: 5px 10px; border: 1px solid transparent; font-size: 0.72rem; }
+        .estado-confirmada { background:#dcfce7; color:#166534; border-color:#86efac; }
+        .estado-reprogramada { background:#e0f2fe; color:#075985; border-color:#7dd3fc; }
+        .estado-cancelada { background:#fee2e2; color:#991b1b; border-color:#fca5a5; }
+        .estado-pendiente { background:#fef3c7; color:#92400e; border-color:#fcd34d; }
+        .estado-sin-confirmar { background:#f1f5f9; color:#475569; border-color:#cbd5e1; }
+        .badge-aspecto { padding: 3px 7px; border-radius: 6px; font-size: 0.68rem; }
+        .aspecto-positiva { background:#dcfce7; color:#166534; }
+        .aspecto-negativa { background:#fee2e2; color:#991b1b; }
+        .aspecto-mixta { background:#f3e8ff; color:#6b21a8; }
+        .aspecto-neutra { background:#e0e7ff; color:#3730a3; }
+        .aspecto-sin-evidencia { background:#f1f5f9; color:#64748b; }
+        .analisis-completo { color:#15803d; font-weight:800; }
+        .analisis-parcial { display:inline-block; color:#b91c1c; background:#fee2e2;
+            padding:4px 7px; border-radius:5px; font-weight:800; }
+        .sin-dato { color:#64748b; font-style: italic; }
+        .aspectos { display: grid; gap: 5px; }
+        .aspectos div { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+        .aspectos div > span:first-child { color:#64748b; font-size:0.7rem; font-weight:800; }
+        .celda-eventos { min-width: 235px; max-width: 310px; }
+        .alerta { padding: 5px 7px; margin: 3px 0; border-radius: 5px; font-size: 0.75rem; }
+        .alerta-correccion { background:#e0f2fe; color:#075985; }
+        .alerta-error { background:#fee2e2; color:#b91c1c; }
+        .celda-accion { text-align: center; }
+        .boton-detalle {
+            border: 0; border-radius: 7px; padding: 8px 12px; cursor: pointer;
+            background:#0369a1; color:#ffffff; font: inherit; font-size:0.78rem; font-weight:750;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.18);
+        }
+        .boton-detalle:hover { background:#075985; }
+        .boton-detalle:focus-visible { outline: 3px solid #7dd3fc; outline-offset: 2px; }
+        .fila-detalle td { padding: 0; background:#f8fafc; border-bottom:2px solid #cbd5e1; }
+        .panel-evidencias { padding: 18px 22px; }
+        .panel-evidencias h3 { margin: 0 0 12px; color:#334155; font-size:0.88rem;
+            text-transform:uppercase; letter-spacing:0.035em; }
+        .evidencia { padding: 11px 13px; margin-bottom: 8px; background:#ffffff;
+            border:1px solid #dbe4ef; border-radius:8px; }
+        .evidencia-meta { display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:0.78rem; }
+        .evidencia p { margin:8px 0 0; color:#475569; font-size:0.82rem; font-style:italic; }
+        .actor { padding:3px 6px; border-radius:5px; background:#e2e8f0; font-weight:800; font-size:0.68rem; }
+        code { padding:3px 6px; border-radius:5px; background:#e2e8f0; color:#334155; font-size:0.72rem; }
+        footer { padding:18px; color:#64748b; text-align:center; font-size:0.8rem; }
+        @media (max-width: 760px) {
+            .container { padding: 12px; }
+            .header { align-items:flex-start; flex-direction:column; padding:20px; }
+            .autores { text-align:left; }
+        }
+        @media print {
+            body { background:#ffffff; } .container { max-width:none; padding:0; }
+            .boton-detalle { display:none; } .tabla-card, .header, .kpi { box-shadow:none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <div>
+                <h1>Universidad Nacional de Asunción — Facultad Politécnica</h1>
+                <p>Diseño de Compiladores · <strong>Trabajo Práctico 3 (Tema 3)</strong>: Speech Analytics Acotado</p>
+            </div>
+            <div class="autores">
+                <strong>Autores:</strong> Carlos Amarilla &amp; Bethania Chavez<br>
+                <strong>Profesor:</strong> Prof. Ing. Sergio A. Aranda
+            </div>
+        </header>
+
+        <section class="kpi-grid" aria-label="Indicadores principales">
+            <div class="kpi azul"><span>Total sesiones</span><strong>12</strong></div>
+            <div class="kpi verde"><span>Confirmadas</span><strong>3</strong></div>
+            <div class="kpi azul"><span>Reprogramadas</span><strong>1</strong></div>
+            <div class="kpi amarillo"><span>Pendientes</span><strong>3</strong></div>
+            <div class="kpi rojo"><span>Canceladas</span><strong>1</strong></div>
+            <div class="kpi gris"><span>Sin confirmar</span><strong>4</strong></div>
+            <div class="kpi rojo"><span>Análisis parciales</span><strong>2</strong></div>
+            <div class="kpi violeta"><span>Eventos corrector</span><strong>2</strong></div>
+        </section>
+
+        <section class="tabla-card" aria-label="Resultados por sesión">
+            <div class="tabla-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Sesión</th><th scope="col">Análisis</th>
+                            <th scope="col">Estado</th><th scope="col">Reserva</th>
+                            <th scope="col">Turno vigente</th><th scope="col">Solicitud pendiente</th>
+                            <th scope="col">Aspectos</th><th scope="col">Eventos / errores</th>
+                            <th scope="col">Detalle</th>
+                        </tr>
+                    </thead>
+                    <tbody><tr class="fila-sesion">
+                    <td><strong>S01</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-pendiente">PENDIENTE</span></td>
+                    <td><strong>RS-208</strong></td>
+                    <td>jueves 10:00</td>
+                    <td>viernes 11:00</td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S01"
+                            onclick="toggleDetalle('S01', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S01" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S01</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“Tengo confirmada la reserva RS-208 para jueves 10:00 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 2</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-neutra">NEUTRA</span><code>Regla_Solicitud_Cambio</code></div><p>“Quiero pasarla al viernes 11:00 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 3</strong><span class="actor">AGENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-neutra">NEUTRA</span><code>Regla_Solicitud_Cambio</code></div><p>“Solicité el cambio .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S02</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-reprogramada">REPROGRAMADA</span></td>
+                    <td><strong>RS-208</strong></td>
+                    <td>viernes 11:00</td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S02"
+                            onclick="toggleDetalle('S02', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S02" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S02</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“Tengo confirmada la reserva RS-208 para jueves 10:00 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 2</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-neutra">NEUTRA</span><code>Regla_Solicitud_Cambio</code></div><p>“Quiero pasarla al viernes 11:00 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 3</strong><span class="actor">AGENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Reprogramacion</code></div><p>“Quedó confirmado el cambio para viernes 11:00 .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S03</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-confirmada">CONFIRMADA</span></td>
+                    <td><span class="sin-dato">No citada</span></td>
+                    <td><span class="sin-dato">Ninguno</span></td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S03"
+                            onclick="toggleDetalle('S03', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S03" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S03</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“Tengo mi reserva confirmada ,”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-neutra">NEUTRA</span><code>Regla_Neg_Cancelacion</code></div><p>“no quiero cancelar .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S04</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-cancelada">CANCELADA</span></td>
+                    <td><strong>RS-203</strong></td>
+                    <td><span class="sin-dato">Ninguno</span></td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S04"
+                            onclick="toggleDetalle('S04', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S04" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S04</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span><code>Regla_Val_Reserva_Neg</code></div><p>“La reserva fue un desastre ; ya cancelé RS-203 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span><code>Regla_Cancelacion_Efectiva</code></div><p>“La reserva fue un desastre ; ya cancelé RS-203 .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S05</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-sin-confirmar">SIN_CONFIRMAR</span></td>
+                    <td><span class="sin-dato">No citada</span></td>
+                    <td><span class="sin-dato">Ninguno</span></td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S05"
+                            onclick="toggleDetalle('S05', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S05" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S05</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>CLARIDAD</strong></span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span><code>Regla_Val_Claridad_Neg</code></div><p>“No entendí la explicación ,”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>ATENCION</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Val_Atencion_Pos</code></div><p>“me atendieron muy bien .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S06</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-confirmada">CONFIRMADA</span></td>
+                    <td><strong>RS-204</strong></td>
+                    <td>lunes 09:30</td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><div class="alerta alerta-correccion">[CORRECCION] Corregido &#x27;resrva&#x27; -&gt; &#x27;reserva&#x27; (Levenshtein=1, candidato único)</div></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S06"
+                            onclick="toggleDetalle('S06', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S06" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S06</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“La resrva RS-204 fue confirmada para lunes 09:30 .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S07</strong></td>
+                    <td><span class="analisis-parcial">PARCIAL</span></td>
+                    <td><span class="badge badge-estado estado-pendiente">PENDIENTE</span></td>
+                    <td><strong>RS-205</strong></td>
+                    <td>martes 08:00</td>
+                    <td>miercoles 10:00</td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><div class="alerta alerta-error">[Error T2] Rol no admitido &#x27;RECEPCION&#x27;; se esperaba CLIENTE o AGENTE</div></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S07"
+                            onclick="toggleDetalle('S07', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S07" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S07</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“Tengo confirmada la reserva RS-205 para martes 08:00 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 3</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-neutra">NEUTRA</span><code>Regla_Solicitud_Cambio</code></div><p>“Quiero pasarla al miercoles 10:00 .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S08</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-sin-confirmar">SIN_CONFIRMAR</span></td>
+                    <td><span class="sin-dato">No citada</span></td>
+                    <td><span class="sin-dato">Ninguno</span></td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><div class="alerta alerta-correccion">[ABSTENCION] Empate a distancia 1 entre [&#x27;cambia&#x27;, &#x27;cambio&#x27;]; se conserva &#x27;cambi&#x27; por abstención</div></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S08"
+                            onclick="toggleDetalle('S08', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S08" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S08</h3>
+                            <p class="sin-dato">No se registraron evidencias textuales.</p>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S09</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-sin-confirmar">SIN_CONFIRMAR</span></td>
+                    <td><span class="sin-dato">No citada</span></td>
+                    <td><span class="sin-dato">Ninguno</span></td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S09"
+                            onclick="toggleDetalle('S09', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S09" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S09</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>ATENCION</strong></span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span><code>Regla_Val_Atencion_Neg</code></div><p>“La atencion no fue muy buena ,”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>CLARIDAD</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Val_Claridad_Pos</code></div><p>“la explicacion fue excelente .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S10</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-sin-confirmar">SIN_CONFIRMAR</span></td>
+                    <td><span class="sin-dato">No citada</span></td>
+                    <td><span class="sin-dato">Ninguno</span></td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-mixta">MIXTA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S10"
+                            onclick="toggleDetalle('S10', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S10" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S10</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>ATENCION</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Val_Atencion_Pos</code></div><p>“La atencion fue excelente .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 2</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>ATENCION</strong></span><span class="badge badge-aspecto aspecto-negativa">NEGATIVA</span><code>Regla_Val_Atencion_Neg</code></div><p>“La atencion fue un desastre .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S11</strong></td>
+                    <td><span class="analisis-parcial">PARCIAL</span></td>
+                    <td><span class="badge badge-estado estado-confirmada">CONFIRMADA</span></td>
+                    <td><strong>RS-209</strong></td>
+                    <td>lunes 10:00</td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><div class="alerta alerta-error">[Error T2] Número fuera de secuencia: esperado 2, recibido 3</div></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S11"
+                            onclick="toggleDetalle('S11', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S11" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S11</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“Tengo confirmada la reserva RS-209 para lunes 10:00 .”</p></article>
+                        </div>
+                    </td>
+                </tr>
+<tr class="fila-sesion">
+                    <td><strong>S12</strong></td>
+                    <td><span class="analisis-completo">COMPLETO</span></td>
+                    <td><span class="badge badge-estado estado-pendiente">PENDIENTE</span></td>
+                    <td><strong>RS-210</strong></td>
+                    <td>viernes 15:00</td>
+                    <td><span class="sin-dato">Ninguna</span></td>
+                    <td><div class="aspectos"><div><span>RES</span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span></div><div><span>ATC</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div><div><span>CLA</span><span class="badge badge-aspecto aspecto-sin-evidencia">SIN_EVIDENCIA</span></div></div></td>
+                    <td class="celda-eventos"><span class="sin-dato">Sin eventos</span></td>
+                    <td class="celda-accion">
+                        <button type="button" class="boton-detalle"
+                            aria-expanded="false" aria-controls="detalle-S12"
+                            onclick="toggleDetalle('S12', this)">
+                            Evidencias
+                        </button>
+                    </td>
+                </tr>
+                <tr id="detalle-S12" class="fila-detalle" hidden>
+                    <td colspan="9">
+                        <div class="panel-evidencias">
+                            <h3>Evidencias registradas — sesión S12</h3>
+                            <article class="evidencia"><div class="evidencia-meta"><strong>Turno 1</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-positiva">POSITIVA</span><code>Regla_Confirmacion_Inicial</code></div><p>“Tengo confirmada la reserva RS-210 para viernes 15:00 .”</p></article><article class="evidencia"><div class="evidencia-meta"><strong>Turno 2</strong><span class="actor">CLIENTE</span><span>Aspecto: <strong>RESERVA</strong></span><span class="badge badge-aspecto aspecto-neutra">NEUTRA</span><code>Regla_Intencion_Cancelacion</code></div><p>“Voy a cancelar .”</p></article>
+                        </div>
+                    </td>
+                </tr></tbody>
+                </table>
+            </div>
+        </section>
+        <footer>Generado automáticamente por el compilador determinista de reservas y turnos.</footer>
+    </main>
+    <script>
+        function toggleDetalle(id, boton) {
+            const fila = document.getElementById('detalle-' + id);
+            const abrir = fila.hidden;
+            fila.hidden = !abrir;
+            boton.setAttribute('aria-expanded', String(abrir));
+            boton.textContent = abrir ? 'Ocultar evidencias' : 'Evidencias';
+        }
+    </script>
+</body>
+</html>

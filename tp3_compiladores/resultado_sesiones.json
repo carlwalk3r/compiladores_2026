@@ -1,0 +1,2256 @@
+[
+  {
+    "id_sesion": "S01",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "PENDIENTE",
+    "entidades": {
+      "reserva_id": "RS-208",
+      "turno_vigente": {
+        "dia": "jueves",
+        "hora": "10:00"
+      },
+      "solicitud_pendiente": {
+        "dia": "viernes",
+        "hora": "11:00"
+      }
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      },
+      "2": {
+        "RESERVA": "NEUTRA"
+      },
+      "3": {
+        "RESERVA": "NEUTRA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "Tengo confirmada la reserva RS-208 para jueves 10:00 ."
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEUTRA",
+        "regla": "Regla_Solicitud_Cambio",
+        "texto": "Quiero pasarla al viernes 11:00 ."
+      },
+      {
+        "turno": 3,
+        "actor": "AGENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEUTRA",
+        "regla": "Regla_Solicitud_Cambio",
+        "texto": "Solicité el cambio ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "Tengo confirmada la reserva RS-208 para jueves 10:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Tengo",
+            "lexema_normalizado": "tengo",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 6
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 20
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-208",
+            "lexema_normalizado": "RS-208",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "jueves",
+            "lexema_normalizado": "jueves",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 40
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "10:00",
+            "lexema_normalizado": "10:00",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 47
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S01",
+            "turno": 1,
+            "offset": 52
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-208"
+        ],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": null
+        }
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "texto_original": "Quiero pasarla al viernes 11:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Quiero",
+            "lexema_normalizado": "quiero",
+            "sesion": "S01",
+            "turno": 2,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CAMBIO",
+            "lexema_original": "pasarla",
+            "lexema_normalizado": "pasarla",
+            "sesion": "S01",
+            "turno": 2,
+            "offset": 7
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "al",
+            "lexema_normalizado": "al",
+            "sesion": "S01",
+            "turno": 2,
+            "offset": 15
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "viernes",
+            "lexema_normalizado": "viernes",
+            "sesion": "S01",
+            "turno": 2,
+            "offset": 18
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "11:00",
+            "lexema_normalizado": "11:00",
+            "sesion": "S01",
+            "turno": 2,
+            "offset": 26
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S01",
+            "turno": 2,
+            "offset": 31
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Solicitud_Cambio"
+        ],
+        "estado_antes": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": {
+            "dia": "viernes",
+            "hora": "11:00"
+          }
+        }
+      },
+      {
+        "turno": 3,
+        "actor": "AGENTE",
+        "texto_original": "Solicité el cambio.",
+        "tokens": [
+          {
+            "tipo": "KW_CAMBIO",
+            "lexema_original": "Solicité",
+            "lexema_normalizado": "solicite",
+            "sesion": "S01",
+            "turno": 3,
+            "offset": 0
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "el",
+            "lexema_normalizado": "el",
+            "sesion": "S01",
+            "turno": 3,
+            "offset": 9
+          },
+          {
+            "tipo": "KW_CAMBIO",
+            "lexema_original": "cambio",
+            "lexema_normalizado": "cambio",
+            "sesion": "S01",
+            "turno": 3,
+            "offset": 12
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S01",
+            "turno": 3,
+            "offset": 18
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Solicitud_Cambio"
+        ],
+        "estado_antes": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": {
+            "dia": "viernes",
+            "hora": "11:00"
+          }
+        },
+        "estado_despues": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": {
+            "dia": "viernes",
+            "hora": "11:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S02",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "REPROGRAMADA",
+    "entidades": {
+      "reserva_id": "RS-208",
+      "turno_vigente": {
+        "dia": "viernes",
+        "hora": "11:00"
+      },
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      },
+      "2": {
+        "RESERVA": "NEUTRA"
+      },
+      "3": {
+        "RESERVA": "POSITIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "Tengo confirmada la reserva RS-208 para jueves 10:00 ."
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEUTRA",
+        "regla": "Regla_Solicitud_Cambio",
+        "texto": "Quiero pasarla al viernes 11:00 ."
+      },
+      {
+        "turno": 3,
+        "actor": "AGENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Reprogramacion",
+        "texto": "Quedó confirmado el cambio para viernes 11:00 ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "Tengo confirmada la reserva RS-208 para jueves 10:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Tengo",
+            "lexema_normalizado": "tengo",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 6
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 20
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-208",
+            "lexema_normalizado": "RS-208",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "jueves",
+            "lexema_normalizado": "jueves",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 40
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "10:00",
+            "lexema_normalizado": "10:00",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 47
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S02",
+            "turno": 1,
+            "offset": 52
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-208"
+        ],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": null
+        }
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "texto_original": "Quiero pasarla al viernes 11:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Quiero",
+            "lexema_normalizado": "quiero",
+            "sesion": "S02",
+            "turno": 2,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CAMBIO",
+            "lexema_original": "pasarla",
+            "lexema_normalizado": "pasarla",
+            "sesion": "S02",
+            "turno": 2,
+            "offset": 7
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "al",
+            "lexema_normalizado": "al",
+            "sesion": "S02",
+            "turno": 2,
+            "offset": 15
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "viernes",
+            "lexema_normalizado": "viernes",
+            "sesion": "S02",
+            "turno": 2,
+            "offset": 18
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "11:00",
+            "lexema_normalizado": "11:00",
+            "sesion": "S02",
+            "turno": 2,
+            "offset": 26
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S02",
+            "turno": 2,
+            "offset": 31
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Solicitud_Cambio"
+        ],
+        "estado_antes": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": {
+            "dia": "viernes",
+            "hora": "11:00"
+          }
+        }
+      },
+      {
+        "turno": 3,
+        "actor": "AGENTE",
+        "texto_original": "Quedó confirmado el cambio para viernes 11:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Quedó",
+            "lexema_normalizado": "quedo",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmado",
+            "lexema_normalizado": "confirmado",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 6
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "el",
+            "lexema_normalizado": "el",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 17
+          },
+          {
+            "tipo": "KW_CAMBIO",
+            "lexema_original": "cambio",
+            "lexema_normalizado": "cambio",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 20
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 27
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "viernes",
+            "lexema_normalizado": "viernes",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 32
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "11:00",
+            "lexema_normalizado": "11:00",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 40
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S02",
+            "turno": 3,
+            "offset": 45
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Reprogramacion"
+        ],
+        "estado_antes": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "jueves",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": {
+            "dia": "viernes",
+            "hora": "11:00"
+          }
+        },
+        "estado_despues": {
+          "estado": "REPROGRAMADA",
+          "reserva_id": "RS-208",
+          "turno_vigente": {
+            "dia": "viernes",
+            "hora": "11:00"
+          },
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S03",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "CONFIRMADA",
+    "entidades": {
+      "reserva_id": null,
+      "turno_vigente": null,
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "Tengo mi reserva confirmada ,"
+      },
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEUTRA",
+        "regla": "Regla_Neg_Cancelacion",
+        "texto": "no quiero cancelar ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "Tengo mi reserva confirmada, pero no quiero cancelar.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Tengo",
+            "lexema_normalizado": "tengo",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "mi",
+            "lexema_normalizado": "mi",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 6
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 9
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ",",
+            "lexema_normalizado": ",",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 27
+          },
+          {
+            "tipo": "CONJ_PERO",
+            "lexema_original": "pero",
+            "lexema_normalizado": "pero",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 29
+          },
+          {
+            "tipo": "ADV_NEG",
+            "lexema_original": "no",
+            "lexema_normalizado": "no",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 34
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "quiero",
+            "lexema_normalizado": "quiero",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 37
+          },
+          {
+            "tipo": "KW_CANCELAR",
+            "lexema_original": "cancelar",
+            "lexema_normalizado": "cancelar",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 44
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S03",
+            "turno": 1,
+            "offset": 52
+          }
+        ],
+        "estructura": "ORACION -> 2 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial",
+          "Regla_Neg_Cancelacion"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S04",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "CANCELADA",
+    "entidades": {
+      "reserva_id": "RS-203",
+      "turno_vigente": null,
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "NEGATIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "NEGATIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEGATIVA",
+        "regla": "Regla_Val_Reserva_Neg",
+        "texto": "La reserva fue un desastre ; ya cancelé RS-203 ."
+      },
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEGATIVA",
+        "regla": "Regla_Cancelacion_Efectiva",
+        "texto": "La reserva fue un desastre ; ya cancelé RS-203 ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "La reserva fue un desastre; ya cancelé RS-203.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "La",
+            "lexema_normalizado": "la",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 3
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "fue",
+            "lexema_normalizado": "fue",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 11
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "un",
+            "lexema_normalizado": "un",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 15
+          },
+          {
+            "tipo": "VAL_NEG",
+            "lexema_original": "desastre",
+            "lexema_normalizado": "desastre",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 18
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ";",
+            "lexema_normalizado": ";",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 26
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "ya",
+            "lexema_normalizado": "ya",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "KW_CANCELAR",
+            "lexema_original": "cancelé",
+            "lexema_normalizado": "cancele",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 31
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-203",
+            "lexema_normalizado": "RS-203",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 39
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S04",
+            "turno": 1,
+            "offset": 45
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-203"
+        ],
+        "acciones_semanticas": [
+          "Regla_Val_Reserva_Neg",
+          "Regla_Cancelacion_Efectiva"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CANCELADA",
+          "reserva_id": "RS-203",
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S05",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "SIN_CONFIRMAR",
+    "entidades": {
+      "reserva_id": null,
+      "turno_vigente": null,
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "SIN_EVIDENCIA",
+      "ATENCION": "POSITIVA",
+      "CLARIDAD": "NEGATIVA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "CLARIDAD": "NEGATIVA",
+        "ATENCION": "POSITIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "CLARIDAD",
+        "valoracion": "NEGATIVA",
+        "regla": "Regla_Val_Claridad_Neg",
+        "texto": "No entendí la explicación ,"
+      },
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "ATENCION",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Val_Atencion_Pos",
+        "texto": "me atendieron muy bien ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "No entendí la explicación, pero me atendieron muy bien.",
+        "tokens": [
+          {
+            "tipo": "ADV_NEG",
+            "lexema_original": "No",
+            "lexema_normalizado": "no",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "ASP_CLARIDAD",
+            "lexema_original": "entendí",
+            "lexema_normalizado": "entendi",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 3
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 11
+          },
+          {
+            "tipo": "ASP_CLARIDAD",
+            "lexema_original": "explicación",
+            "lexema_normalizado": "explicacion",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 14
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ",",
+            "lexema_normalizado": ",",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 25
+          },
+          {
+            "tipo": "CONJ_PERO",
+            "lexema_original": "pero",
+            "lexema_normalizado": "pero",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 27
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "me",
+            "lexema_normalizado": "me",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 32
+          },
+          {
+            "tipo": "ASP_ATENCION",
+            "lexema_original": "atendieron",
+            "lexema_normalizado": "atendieron",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "ADV_INTENS",
+            "lexema_original": "muy",
+            "lexema_normalizado": "muy",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 46
+          },
+          {
+            "tipo": "VAL_POS",
+            "lexema_original": "bien",
+            "lexema_normalizado": "bien",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 50
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S05",
+            "turno": 1,
+            "offset": 54
+          }
+        ],
+        "estructura": "ORACION -> 2 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Val_Claridad_Neg",
+          "Regla_Val_Atencion_Pos"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S06",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "CONFIRMADA",
+    "entidades": {
+      "reserva_id": "RS-204",
+      "turno_vigente": {
+        "dia": "lunes",
+        "hora": "09:30"
+      },
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      }
+    },
+    "correcciones": [
+      {
+        "turno": 1,
+        "tipo": "CORRECCION",
+        "original": "resrva",
+        "corregido": "reserva",
+        "motivo": "Corregido 'resrva' -> 'reserva' (Levenshtein=1, candidato único)"
+      }
+    ],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "La resrva RS-204 fue confirmada para lunes 09:30 ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "La resrva RS-204 fue confirmada para lunes 09:30.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "La",
+            "lexema_normalizado": "la",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "resrva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 3
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-204",
+            "lexema_normalizado": "RS-204",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 10
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "fue",
+            "lexema_normalizado": "fue",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 21
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 32
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "lunes",
+            "lexema_normalizado": "lunes",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 37
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "09:30",
+            "lexema_normalizado": "09:30",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 43
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S06",
+            "turno": 1,
+            "offset": 48
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-204"
+        ],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-204",
+          "turno_vigente": {
+            "dia": "lunes",
+            "hora": "09:30"
+          },
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S07",
+    "analisis": "PARCIAL",
+    "estado_conversacional": "PENDIENTE",
+    "entidades": {
+      "reserva_id": "RS-205",
+      "turno_vigente": {
+        "dia": "martes",
+        "hora": "08:00"
+      },
+      "solicitud_pendiente": {
+        "dia": "miercoles",
+        "hora": "10:00"
+      }
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      },
+      "3": {
+        "RESERVA": "NEUTRA"
+      }
+    },
+    "correcciones": [],
+    "errores": [
+      {
+        "turno": 2,
+        "mensaje": "Rol no admitido 'RECEPCION'; se esperaba CLIENTE o AGENTE",
+        "linea": "2 RECEPCION: Hola buen dia."
+      }
+    ],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "Tengo confirmada la reserva RS-205 para martes 08:00 ."
+      },
+      {
+        "turno": 3,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEUTRA",
+        "regla": "Regla_Solicitud_Cambio",
+        "texto": "Quiero pasarla al miercoles 10:00 ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "Tengo confirmada la reserva RS-205 para martes 08:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Tengo",
+            "lexema_normalizado": "tengo",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 6
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 20
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-205",
+            "lexema_normalizado": "RS-205",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "martes",
+            "lexema_normalizado": "martes",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 40
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "08:00",
+            "lexema_normalizado": "08:00",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 47
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S07",
+            "turno": 1,
+            "offset": 52
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-205"
+        ],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-205",
+          "turno_vigente": {
+            "dia": "martes",
+            "hora": "08:00"
+          },
+          "solicitud_pendiente": null
+        }
+      },
+      {
+        "turno": 3,
+        "actor": "CLIENTE",
+        "texto_original": "Quiero pasarla al miercoles 10:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Quiero",
+            "lexema_normalizado": "quiero",
+            "sesion": "S07",
+            "turno": 3,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CAMBIO",
+            "lexema_original": "pasarla",
+            "lexema_normalizado": "pasarla",
+            "sesion": "S07",
+            "turno": 3,
+            "offset": 7
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "al",
+            "lexema_normalizado": "al",
+            "sesion": "S07",
+            "turno": 3,
+            "offset": 15
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "miercoles",
+            "lexema_normalizado": "miercoles",
+            "sesion": "S07",
+            "turno": 3,
+            "offset": 18
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "10:00",
+            "lexema_normalizado": "10:00",
+            "sesion": "S07",
+            "turno": 3,
+            "offset": 28
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S07",
+            "turno": 3,
+            "offset": 33
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Solicitud_Cambio"
+        ],
+        "estado_antes": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-205",
+          "turno_vigente": {
+            "dia": "martes",
+            "hora": "08:00"
+          },
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-205",
+          "turno_vigente": {
+            "dia": "martes",
+            "hora": "08:00"
+          },
+          "solicitud_pendiente": {
+            "dia": "miercoles",
+            "hora": "10:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S08",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "SIN_CONFIRMAR",
+    "entidades": {
+      "reserva_id": null,
+      "turno_vigente": null,
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "SIN_EVIDENCIA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {},
+    "correcciones": [
+      {
+        "turno": 1,
+        "tipo": "ABSTENCION",
+        "original": "cambi",
+        "corregido": "cambi",
+        "motivo": "Empate a distancia 1 entre ['cambia', 'cambio']; se conserva 'cambi' por abstención"
+      }
+    ],
+    "errores": [],
+    "evidencias": [],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "cambi",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "cambi",
+            "lexema_normalizado": "cambi",
+            "sesion": "S08",
+            "turno": 1,
+            "offset": 0
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S09",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "SIN_CONFIRMAR",
+    "entidades": {
+      "reserva_id": null,
+      "turno_vigente": null,
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "SIN_EVIDENCIA",
+      "ATENCION": "NEGATIVA",
+      "CLARIDAD": "POSITIVA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "ATENCION": "NEGATIVA",
+        "CLARIDAD": "POSITIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "ATENCION",
+        "valoracion": "NEGATIVA",
+        "regla": "Regla_Val_Atencion_Neg",
+        "texto": "La atencion no fue muy buena ,"
+      },
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "CLARIDAD",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Val_Claridad_Pos",
+        "texto": "la explicacion fue excelente ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "La atencion no fue muy buena, pero la explicacion fue excelente.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "La",
+            "lexema_normalizado": "la",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "ASP_ATENCION",
+            "lexema_original": "atencion",
+            "lexema_normalizado": "atencion",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 3
+          },
+          {
+            "tipo": "ADV_NEG",
+            "lexema_original": "no",
+            "lexema_normalizado": "no",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 12
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "fue",
+            "lexema_normalizado": "fue",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 15
+          },
+          {
+            "tipo": "ADV_INTENS",
+            "lexema_original": "muy",
+            "lexema_normalizado": "muy",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 19
+          },
+          {
+            "tipo": "VAL_POS",
+            "lexema_original": "buena",
+            "lexema_normalizado": "buena",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 23
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ",",
+            "lexema_normalizado": ",",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "CONJ_PERO",
+            "lexema_original": "pero",
+            "lexema_normalizado": "pero",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 30
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "ASP_CLARIDAD",
+            "lexema_original": "explicacion",
+            "lexema_normalizado": "explicacion",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 38
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "fue",
+            "lexema_normalizado": "fue",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 50
+          },
+          {
+            "tipo": "VAL_POS",
+            "lexema_original": "excelente",
+            "lexema_normalizado": "excelente",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 54
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S09",
+            "turno": 1,
+            "offset": 63
+          }
+        ],
+        "estructura": "ORACION -> 2 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Val_Atencion_Neg",
+          "Regla_Val_Claridad_Pos"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S10",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "SIN_CONFIRMAR",
+    "entidades": {
+      "reserva_id": null,
+      "turno_vigente": null,
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "SIN_EVIDENCIA",
+      "ATENCION": "MIXTA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "ATENCION": "POSITIVA"
+      },
+      "2": {
+        "ATENCION": "NEGATIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "ATENCION",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Val_Atencion_Pos",
+        "texto": "La atencion fue excelente ."
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "aspecto": "ATENCION",
+        "valoracion": "NEGATIVA",
+        "regla": "Regla_Val_Atencion_Neg",
+        "texto": "La atencion fue un desastre ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "La atencion fue excelente.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "La",
+            "lexema_normalizado": "la",
+            "sesion": "S10",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "ASP_ATENCION",
+            "lexema_original": "atencion",
+            "lexema_normalizado": "atencion",
+            "sesion": "S10",
+            "turno": 1,
+            "offset": 3
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "fue",
+            "lexema_normalizado": "fue",
+            "sesion": "S10",
+            "turno": 1,
+            "offset": 12
+          },
+          {
+            "tipo": "VAL_POS",
+            "lexema_original": "excelente",
+            "lexema_normalizado": "excelente",
+            "sesion": "S10",
+            "turno": 1,
+            "offset": 16
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S10",
+            "turno": 1,
+            "offset": 25
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Val_Atencion_Pos"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "texto_original": "La atencion fue un desastre.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "La",
+            "lexema_normalizado": "la",
+            "sesion": "S10",
+            "turno": 2,
+            "offset": 0
+          },
+          {
+            "tipo": "ASP_ATENCION",
+            "lexema_original": "atencion",
+            "lexema_normalizado": "atencion",
+            "sesion": "S10",
+            "turno": 2,
+            "offset": 3
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "fue",
+            "lexema_normalizado": "fue",
+            "sesion": "S10",
+            "turno": 2,
+            "offset": 12
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "un",
+            "lexema_normalizado": "un",
+            "sesion": "S10",
+            "turno": 2,
+            "offset": 16
+          },
+          {
+            "tipo": "VAL_NEG",
+            "lexema_original": "desastre",
+            "lexema_normalizado": "desastre",
+            "sesion": "S10",
+            "turno": 2,
+            "offset": 19
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S10",
+            "turno": 2,
+            "offset": 27
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Val_Atencion_Neg"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S11",
+    "analisis": "PARCIAL",
+    "estado_conversacional": "CONFIRMADA",
+    "entidades": {
+      "reserva_id": "RS-209",
+      "turno_vigente": {
+        "dia": "lunes",
+        "hora": "10:00"
+      },
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      }
+    },
+    "correcciones": [],
+    "errores": [
+      {
+        "turno": 2,
+        "mensaje": "Número fuera de secuencia: esperado 2, recibido 3",
+        "linea": "3 CLIENTE: Quiero pasarla al martes 12:00."
+      }
+    ],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "Tengo confirmada la reserva RS-209 para lunes 10:00 ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "Tengo confirmada la reserva RS-209 para lunes 10:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Tengo",
+            "lexema_normalizado": "tengo",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 6
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 20
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-209",
+            "lexema_normalizado": "RS-209",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "lunes",
+            "lexema_normalizado": "lunes",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 40
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "10:00",
+            "lexema_normalizado": "10:00",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 46
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S11",
+            "turno": 1,
+            "offset": 51
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-209"
+        ],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-209",
+          "turno_vigente": {
+            "dia": "lunes",
+            "hora": "10:00"
+          },
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  },
+  {
+    "id_sesion": "S12",
+    "analisis": "COMPLETO",
+    "estado_conversacional": "PENDIENTE",
+    "entidades": {
+      "reserva_id": "RS-210",
+      "turno_vigente": {
+        "dia": "viernes",
+        "hora": "15:00"
+      },
+      "solicitud_pendiente": null
+    },
+    "resumen_por_aspecto": {
+      "RESERVA": "POSITIVA",
+      "ATENCION": "SIN_EVIDENCIA",
+      "CLARIDAD": "SIN_EVIDENCIA"
+    },
+    "valoraciones_por_turno": {
+      "1": {
+        "RESERVA": "POSITIVA"
+      },
+      "2": {
+        "RESERVA": "NEUTRA"
+      }
+    },
+    "correcciones": [],
+    "errores": [],
+    "evidencias": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "POSITIVA",
+        "regla": "Regla_Confirmacion_Inicial",
+        "texto": "Tengo confirmada la reserva RS-210 para viernes 15:00 ."
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "aspecto": "RESERVA",
+        "valoracion": "NEUTRA",
+        "regla": "Regla_Intencion_Cancelacion",
+        "texto": "Voy a cancelar ."
+      }
+    ],
+    "trazabilidad": [
+      {
+        "turno": 1,
+        "actor": "CLIENTE",
+        "texto_original": "Tengo confirmada la reserva RS-210 para viernes 15:00.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Tengo",
+            "lexema_normalizado": "tengo",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 0
+          },
+          {
+            "tipo": "KW_CONFIRMACION",
+            "lexema_original": "confirmada",
+            "lexema_normalizado": "confirmada",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 6
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "la",
+            "lexema_normalizado": "la",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 17
+          },
+          {
+            "tipo": "ASP_RESERVA",
+            "lexema_original": "reserva",
+            "lexema_normalizado": "reserva",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 20
+          },
+          {
+            "tipo": "COD_RESERVA",
+            "lexema_original": "RS-210",
+            "lexema_normalizado": "RS-210",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 28
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "para",
+            "lexema_normalizado": "para",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 35
+          },
+          {
+            "tipo": "DIA",
+            "lexema_original": "viernes",
+            "lexema_normalizado": "viernes",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 40
+          },
+          {
+            "tipo": "HORA",
+            "lexema_original": "15:00",
+            "lexema_normalizado": "15:00",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 48
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S12",
+            "turno": 1,
+            "offset": 53
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [
+          "Insertar reserva_id=RS-210"
+        ],
+        "acciones_semanticas": [
+          "Regla_Confirmacion_Inicial"
+        ],
+        "estado_antes": {
+          "estado": "SIN_CONFIRMAR",
+          "reserva_id": null,
+          "turno_vigente": null,
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-210",
+          "turno_vigente": {
+            "dia": "viernes",
+            "hora": "15:00"
+          },
+          "solicitud_pendiente": null
+        }
+      },
+      {
+        "turno": 2,
+        "actor": "CLIENTE",
+        "texto_original": "Voy a cancelar.",
+        "tokens": [
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "Voy",
+            "lexema_normalizado": "voy",
+            "sesion": "S12",
+            "turno": 2,
+            "offset": 0
+          },
+          {
+            "tipo": "PALABRA",
+            "lexema_original": "a",
+            "lexema_normalizado": "a",
+            "sesion": "S12",
+            "turno": 2,
+            "offset": 4
+          },
+          {
+            "tipo": "KW_CANCELAR",
+            "lexema_original": "cancelar",
+            "lexema_normalizado": "cancelar",
+            "sesion": "S12",
+            "turno": 2,
+            "offset": 6
+          },
+          {
+            "tipo": "PUNTUACION",
+            "lexema_original": ".",
+            "lexema_normalizado": ".",
+            "sesion": "S12",
+            "turno": 2,
+            "offset": 14
+          }
+        ],
+        "estructura": "ORACION -> 1 CLAUSULA(S)",
+        "consultas_ts": [],
+        "acciones_semanticas": [
+          "Regla_Intencion_Cancelacion"
+        ],
+        "estado_antes": {
+          "estado": "CONFIRMADA",
+          "reserva_id": "RS-210",
+          "turno_vigente": {
+            "dia": "viernes",
+            "hora": "15:00"
+          },
+          "solicitud_pendiente": null
+        },
+        "estado_despues": {
+          "estado": "PENDIENTE",
+          "reserva_id": "RS-210",
+          "turno_vigente": {
+            "dia": "viernes",
+            "hora": "15:00"
+          },
+          "solicitud_pendiente": null
+        }
+      }
+    ]
+  }
+]

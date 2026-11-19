@@ -1,0 +1,45 @@
+SESION S01
+1 CLIENTE: Tengo confirmada la reserva RS-208 para jueves 10:00.
+2 CLIENTE: Quiero pasarla al viernes 11:00.
+3 AGENTE: Solicité el cambio.
+FIN
+SESION S02
+1 CLIENTE: Tengo confirmada la reserva RS-208 para jueves 10:00.
+2 CLIENTE: Quiero pasarla al viernes 11:00.
+3 AGENTE: Quedó confirmado el cambio para viernes 11:00.
+FIN
+SESION S03
+1 CLIENTE: Tengo mi reserva confirmada, pero no quiero cancelar.
+FIN
+SESION S04
+1 CLIENTE: La reserva fue un desastre; ya cancelé RS-203.
+FIN
+SESION S05
+1 CLIENTE: No entendí la explicación, pero me atendieron muy bien.
+FIN
+SESION S06
+1 CLIENTE: La resrva RS-204 fue confirmada para lunes 09:30.
+FIN
+SESION S07
+1 CLIENTE: Tengo confirmada la reserva RS-205 para martes 08:00.
+2 RECEPCION: Hola buen dia.
+3 CLIENTE: Quiero pasarla al miercoles 10:00.
+FIN
+SESION S08
+1 CLIENTE: cambi
+FIN
+SESION S09
+1 CLIENTE: La atencion no fue muy buena, pero la explicacion fue excelente.
+FIN
+SESION S10
+1 CLIENTE: La atencion fue excelente.
+2 CLIENTE: La atencion fue un desastre.
+FIN
+SESION S11
+1 CLIENTE: Tengo confirmada la reserva RS-209 para lunes 10:00.
+3 CLIENTE: Quiero pasarla al martes 12:00.
+FIN
+SESION S12
+1 CLIENTE: Tengo confirmada la reserva RS-210 para viernes 15:00.
+2 CLIENTE: Voy a cancelar.
+FIN
